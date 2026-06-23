@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Shield, RefreshCw, MapPin, Calendar, PlusCircle, LogIn, UserPlus, Layers } from 'lucide-react';
 
-const API_URL = 'http://localhost:4000/api';
+// PRODUCTION FIX: Pointing cleanly to your live Render server instead of local development host
+const API_URL = 'https://resourceflow-backend.onrender.com/api';
 
 export default function App() {
   // Authentication State
