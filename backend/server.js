@@ -12,7 +12,13 @@ app.use(express.json());
 app.use('/api/auth',      authRoutes);
 app.use('/api/resources', resourceRoutes);
 
+// Health check endpoints for production tracking
 app.get('/health', (req, res) => res.json({ status: 'ok' }));
+app.get('/api/health', (req, res) => res.json({ status: 'ok' }));
 
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+// FIX: Added '0.0.0.0' to explicitly bind to all network interfaces for Render
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+});
