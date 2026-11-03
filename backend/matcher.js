@@ -28,8 +28,8 @@ function findMatches(resource, options) {
       const oLat = parseFloat(option.latitude);
       const oLon = parseFloat(option.longitude);
       
-      // 1. Calculate Distance Matrix
-      const distance = calculateDistance(rLat, rLon, oLat, oLat);
+      // 1. Calculate Distance Matrix using Haversine formula
+      const distance = calculateDistance(rLat, rLon, oLat, oLon);
       
       // 2. Calculate Distance Score (Closer = Higher Score)
       let distanceScore = 0;
@@ -64,4 +64,4 @@ function findMatches(resource, options) {
     .sort((a, b) => b.matchScore - a.matchScore);
 }
 
-module.exports = { findMatches };
+module.exports = { findMatches, calculateDistance };

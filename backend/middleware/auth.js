@@ -13,4 +13,26 @@ function authMiddleware(req, res, next) {
   }
 }
 
+/**
+ * Role-Based Access Control (RBAC) Middleware
+ * Securely partitions administrative, dispatch officer, and user operational workflows
+ */
+function requireRole(...roles) {
+  return (req, res, next) => {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Authentication required' });
+    }
+    const userRole = req.user.role || 'user';
+    if (!roles.includes(userRole)) {
+      return res.status(403).json({ 
+        error: 'Forbidden: Insufficient privileges for this operational workflow' 
+      });
+    }
+    next();
+  };
+}
+
+authMiddleware.requireRole = requireRole;
 module.exports = authMiddleware;
+module.exports.authMiddleware = authMiddleware;
+module.exports.requireRole = requireRole;
