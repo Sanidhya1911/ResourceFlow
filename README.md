@@ -106,7 +106,7 @@ $$d = R \cdot c \quad (\text{km})$$
 
 A hard spatial operational threshold is enforced ($d_{\max} = 10\text{ km}$). Candidates beyond this perimeter receive a zero spatial score:
 
-$$S_{\text{distance}} = \begin{cases} 1 - \dfrac{d}{d_{\max}}, & \text{if } d \le d_{\max} \\[8pt] 0, & \text{if } d > d_{\max} \end{cases}$$
+$$S_{\text{distance}} = \begin{cases} 1 - \dfrac{d}{d_{\max}}, & \text{if } d \le d_{\max} \\ 0, & \text{if } d > d_{\max} \end{cases}$$
 
 ### 3. Dynamic Temporal Decay Matrix
 
@@ -114,7 +114,7 @@ Resources exhibit temporal urgency based on expiration timestamps $t_{\text{expi
 
 $$t_{\text{remaining}} = t_{\text{expiry}} - t_{\text{now}}$$
 
-$$S_{\text{temporal}} = \begin{cases} 1 - \min\left(\dfrac{t_{\text{remaining}}}{T_{\text{window}}}, \; 1\right), & \text{if } t_{\text{remaining}} > 0 \\[8pt] 0, & \text{if } t_{\text{remaining}} \le 0 \end{cases}$$
+$$S_{\text{temporal}} = \begin{cases} 1 - \min\left(\dfrac{t_{\text{remaining}}}{T_{\text{window}}}, \; 1\right), & \text{if } t_{\text{remaining}} > 0 \\ 0, & \text{if } t_{\text{remaining}} \le 0 \end{cases}$$
 
 ### 4. Multi-Objective Weighted Match Scoring
 
@@ -126,7 +126,7 @@ $$\text{Where } w_{\text{spatial}} = 0.5, \quad w_{\text{temporal}} = 0.5$$
 
 Candidates are sorted deterministically in descending score order:
 
-$$\text{Ordered Candidates} = \operatorname{sort}_{\downarrow S_{\text{match}}}(\{ c_1, c_2, \dots, c_n \}) \quad \text{in } O(N \log N) \text{ time}$$
+$$\text{Ranked Candidates} = \text{sort}_{\downarrow S_{\text{match}}}\left(\{ c_1, c_2, \dots, c_n \}\right) \quad \text{in } O(N \log N) \text{ time}$$
 
 ---
 
